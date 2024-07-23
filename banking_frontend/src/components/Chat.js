@@ -1,35 +1,38 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import { useDispatch, useSelector } from 'react-redux';
+import { sendMessage } from '../redux/actions/chatActions';
+import './ChatInterface.css';
 
-const Chat = () => {
-    const [query, setQuery] = useState('');
-    const [response, setResponse] = useState('');
+const ChatInterface = () => {
+  const [input, setInput] = useState('');
+  const dispatch = useDispatch();
+  const messages = useSelector((state) => state.chat.messages);
 
-    const handleQueryChange = (e) => {
-        setQuery(e.target.value);
-    };
+  const handleSendMessage = () => {
+    dispatch(sendMessage(input));
+    setInput('');
+  };
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        try {
-            const res = await axios.post('http://localhost:8000/api/chat/', { query });
-            setResponse(res.data.response);
-        } catch (error) {
-            console.error(error);
-        }
-    };
-
-    return (
-        <div>
-            <form onSubmit={handleSubmit}>
-                <input type="text" value={query} onChange={handleQueryChange} />
-                <button type="submit">Send</button>
-            </form>
-            <div>
-                {response}
-            </div>
-        </div>
-    );
+  return (
+    <div className="chat-interface">
+      <div className="chat-window">
+        {messages.map((message, index) => (
+          <div key={index} className={`message ${message.sender}`}>
+            {message.text}
+          </div>
+        ))}
+      </div>
+      <div className="input-bar">
+        <input
+          type="text"
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+          placeholder="Type a message..."
+        />
+        <button onClick={handleSendMessage}>Send</button>
+      </div>
+    </div>
+  );
 };
 
-export default Chat;
+export default ChatInterface;
