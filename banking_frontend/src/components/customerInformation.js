@@ -1,23 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import { getCustomerInformation } from '../api/service';
+import React from 'react';
 
 const CustomerInformation = () => {
-  const [data, setData] = useState([]);
-
-  useEffect(() => {
-    getCustomerInformation()
-      .then(response => setData(response.data))
-      .catch(error => console.error(error));
-  }, []);
-
   return (
-    <div>
+    <div className="customer-information">
       <h1>Customer Information</h1>
-      <ul>
-        {data.map(item => (
-          <li key={item.customer_id}>{item.name} - {item.gender}</li>
-        ))}
-      </ul>
+      {/* Add customer information content here */}
     </div>
   );
 };

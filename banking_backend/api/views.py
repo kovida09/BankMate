@@ -7,6 +7,7 @@ from .serializers import CustomerInformationSerializer, AccountInformationSerial
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from transformers import pipeline
+from django.http import JsonResponse
 
 class CustomerInformationViewSet(viewsets.ModelViewSet):
     queryset = CustomerInformation.objects.all()
@@ -33,6 +34,14 @@ def chat(request):
     query = request.data.get('query')
     model_name = "distilbert-base-uncased-distilled-squad"
     nlp = pipeline("question-answering", model=model_name)
-    context = "Your context from the database"
+    customer_context = ""
+    for customer in CustomerInformation.objects.all()[:5]:  # Limit the number of records for simplicity
+        customer_context += f"Customer {customer.customer_id} named {customer.name} lives in {customer.city}, {customer.state}. "
+
+    account_context = ""
+    for account in AccountInformation.objects.all()[:5]:
+        account_context += f"Account {account.account_id} of type {account.account_type} has balance {account.balance}. "
+    
+    context = customer_context + account_context
     result = nlp(question=query, context=context)
     return Response({"response": result['answer']})

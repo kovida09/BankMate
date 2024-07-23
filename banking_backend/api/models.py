@@ -10,30 +10,13 @@ class CustomerInformation(models.Model):
     state = models.CharField(max_length=50)
     pin_code = models.CharField(max_length=10)
     default_status = models.IntegerField()
-    bankruptcy_indicator = models.IntegerField()
-    credit_inquiries_past_6_months = models.IntegerField()
-    months_since_last_inquiry = models.IntegerField()
-    percentage_open_accounts = models.DecimalField(max_digits=5, decimal_places=2)
-    percentage_open_accounts_past_24_months = models.DecimalField(max_digits=5, decimal_places=2)
-    total_open_accounts = models.IntegerField()
-    total_credit_limit_sum = models.DecimalField(max_digits=10, decimal_places=2)
-    max_credit_limit = models.DecimalField(max_digits=10, decimal_places=2)
-    percentage_high_balance_accounts = models.DecimalField(max_digits=5, decimal_places=2)
-    percentage_satisfied_accounts = models.DecimalField(max_digits=5, decimal_places=2)
-    bad_derogatory_marks_count = models.IntegerField()
-    satisfied_accounts_count = models.IntegerField()
-    months_since_first_credit_account = models.IntegerField()
-    months_since_last_credit_account = models.IntegerField()
-    delinquent_accounts_30_to_60_days_past_24_months = models.IntegerField()
-    delinquent_accounts_90_days_past_24_months = models.IntegerField()
-    total_delinquent_accounts_60_days = models.IntegerField()
 
     def __str__(self):
         return self.name
 
 class AccountInformation(models.Model):
     account_id = models.AutoField(primary_key=True)
-    customer_id = models.ForeignKey(CustomerInformation, on_delete=models.CASCADE)
+    customer = models.ForeignKey(CustomerInformation, on_delete=models.CASCADE)
     account_type = models.CharField(max_length=50)
     account_number = models.CharField(max_length=50)
     account_status = models.CharField(max_length=50)
@@ -45,11 +28,10 @@ class AccountInformation(models.Model):
     date_closed = models.DateField(null=True, blank=True)
     monthly_fee = models.DecimalField(max_digits=10, decimal_places=2)
     minimum_balance_required = models.DecimalField(max_digits=10, decimal_places=2)
-    last_transaction_date = models.DateField()
+    last_transaction_date = models.DateField(null=True, blank=True)
     total_deposits = models.DecimalField(max_digits=10, decimal_places=2)
     total_withdrawals = models.DecimalField(max_digits=10, decimal_places=2)
     total_transactions = models.IntegerField()
-
     def __str__(self):
         return self.account_number
 

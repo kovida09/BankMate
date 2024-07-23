@@ -1,34 +1,25 @@
-import { createSlice } from '@reduxjs/toolkit';
-
-const chatSlice = createSlice({
-  name: 'chat',
-  initialState: {
+const initialState = {
     messages: [],
     loading: false,
     error: null,
-  },
-  reducers: {
-    sendMessageRequest: (state, action) => {
-      state.loading = true;
-    },
-    sendMessageSuccess: (state, action) => {
-      state.loading = false;
-      state.messages.push(
-        { text: action.payload.message, sender: 'user' },
-        { text: action.payload.response, sender: 'bot' }
-      );
-    },
-    sendMessageFailure: (state, action) => {
-      state.loading = false;
-      state.error = action.payload;
-    },
-  },
-});
-
-export const {
-  sendMessageRequest,
-  sendMessageSuccess,
-  sendMessageFailure,
-} = chatSlice.actions;
-
-export default chatSlice.reducer;
+  };
+  
+  const chatReducer = (state = initialState, action) => {
+    switch (action.type) {
+      case 'SEND_MESSAGE_REQUEST':
+        return { ...state, loading: true, error: null };
+      case 'SEND_MESSAGE_SUCCESS':
+        return {
+          ...state,
+          loading: false,
+          messages: [...state.messages, { text: action.payload, sender: 'bot' }],
+        };
+      case 'SEND_MESSAGE_FAILURE':
+        return { ...state, loading: false, error: action.payload };
+      default:
+        return state;
+    }
+  };
+  
+  export default chatReducer;
+  

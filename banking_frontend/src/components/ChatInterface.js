@@ -7,10 +7,14 @@ const ChatInterface = () => {
   const [input, setInput] = useState('');
   const dispatch = useDispatch();
   const messages = useSelector((state) => state.chat.messages);
+  const loading = useSelector((state) => state.chat.loading);
+  const error = useSelector((state) => state.chat.error);
 
   const handleSendMessage = () => {
-    dispatch(sendMessage(input));
-    setInput('');
+    if (input.trim()) {
+      dispatch(sendMessage(input));
+      setInput('');
+    }
   };
 
   return (
@@ -21,6 +25,8 @@ const ChatInterface = () => {
             {message.text}
           </div>
         ))}
+        {loading && <div className="loading">Loading...</div>}
+        {error && <div className="error">{error}</div>}
       </div>
       <div className="input-bar">
         <input

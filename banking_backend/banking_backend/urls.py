@@ -14,11 +14,28 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django import contrib
-admin = contrib.admin
+from django.contrib import admin
 from django.urls import path, include
+from rest_framework.routers import DefaultRouter
+from api.views import (
+    CustomerInformationViewSet,
+    AccountInformationViewSet,
+    TransactionInformationViewSet,
+    LoanInformationViewSet,
+    CreditCardInformationViewSet,
+    chat
+)
+
+router = DefaultRouter()
+router.register(r'customers', CustomerInformationViewSet)
+router.register(r'accounts', AccountInformationViewSet)
+router.register(r'transactions', TransactionInformationViewSet)
+router.register(r'loans', LoanInformationViewSet)
+router.register(r'creditcards', CreditCardInformationViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include('api.urls')),
+    path('api/', include(router.urls)),
+    path('api/chat/', chat, name='chat')
 ]
+

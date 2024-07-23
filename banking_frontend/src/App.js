@@ -1,43 +1,38 @@
 import React from 'react';
-import { Provider } from 'react-redux';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import Chat from './components/Chat';
-import Sidebar from './components/Sidebar';
-import Dashboard from './components/Dashboard';
+import Sidebar from './components/sidebar';
 import ChatInterface from './components/ChatInterface';
-import './App.css';
-import AccountInformation from './components/AccountInformation';
-import TransactionInformation from './components/TransactionInformation';
+import Dashboard from './components/Dashboard';
+import UserManagement from './components/UserManagement';
+import Transactions from './components/Transactions';
+import EmployeeActivity from './components/EmployeeActivity';
+import CustomerInformation from './components/CustomerInformation';
+import CreditCardTransactions from './components/CreditCardTransactions';
 import LoanInformation from './components/LoanInformation';
-import CreditCardInformation from './components/CreditCardInformation';
-import CustomerInformation from './components/customerInformation';
-import store from './redux/store';
+import AccountInformation from './components/AccountInformation';
+import './App.css';
 
-function App() {
+const App = () => {
   return (
-    <Provider store={store}>
     <Router>
       <div className="app">
         <Sidebar />
-        <main>
+        <div className="main-content">
           <Switch>
-            <Route path="/" exact component={Dashboard} />
-            <Route path="/chat" component={ChatInterface} />
-            {/* Add other routes here */}
+            <Route path="/dashboard" component={Dashboard} />
+            <Route path="/user-management" component={UserManagement} />
+            <Route path="/transactions" component={Transactions} />
+            <Route path="/employee-activity" component={EmployeeActivity} />
+            <Route path="/customer-information" component={CustomerInformation} />
+            <Route path="/credit-card-transactions" component={CreditCardTransactions} />
+            <Route path="/loan-information" component={LoanInformation} />
+            <Route path="/account-information" component={AccountInformation} />
+            <Route path="/" exact component={ChatInterface} />
           </Switch>
-        </main>
+        </div>
       </div>
-      <Switch>
-        <Route path="/coustomer-information" component={CustomerInformation} />
-        <Route path="/account-information" component={AccountInformation} />
-        <Route path="/transaction-information" component={TransactionInformation} />
-        <Route path="/loan-information" component={LoanInformation} />
-        <Route path="/credit-card-information" component={CreditCardInformation} />
-        <Route path="/chat" component={Chat} />
-      </Switch>
     </Router>
-  </Provider>
   );
-}
+};
 
 export default App;
