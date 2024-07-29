@@ -1,44 +1,29 @@
 .dashboard {
-    padding: 20px;
-    background-color: #f9f9f9;
-    min-height: 100vh;
-  }
-  
-  h1 {
-    font-size: 2.5em;
-    color: #333;
-    margin-bottom: 20px;
-  }
-  
-  .options {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-  
-  .options a {
-    text-decoration: none;
-    color: #007bff;
-    padding: 10px 15px;
-    border: 1px solid #007bff;
-    border-radius: 5px;
-    transition: background-color 0.3s, color 0.3s;
-  }
-  
-  .options a:hover {
-    background-color: #007bff;
-    color: #fff;
-  }
-  
-  @media (min-width: 768px) {
-    .options {
-      flex-direction: row;
-      flex-wrap: wrap;
-    }
-  
-    .options a {
-      flex: 1;
-      text-align: center;
-    }
-  }
-  
+  padding: 20px;
+}
+
+.dashboard h1 {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.options {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.option {
+  background-color: #1e1e2d;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+  border-radius: 8px;
+  text-decoration: none;
+  width: 150px;
+  transition: background-color 0.3s ease;
+}
+
+.option:hover {
+  background-color: #575768;
+}

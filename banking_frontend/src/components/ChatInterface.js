@@ -19,6 +19,7 @@ const ChatInterface = () => {
 
   return (
     <div className="chat-interface">
+      <div className="chat-header">Your Banking Guide</div>
       <div className="chat-window">
         {messages.map((message, index) => (
           <div key={index} className={`message ${message.sender}`}>
@@ -33,7 +34,7 @@ const ChatInterface = () => {
           type="text"
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          placeholder="Type a message..."
+          placeholder="Ask your query"
         />
         <button onClick={handleSendMessage}>Send</button>
       </div>

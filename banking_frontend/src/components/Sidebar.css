@@ -1,28 +1,61 @@
 .sidebar {
-    width: 250px;
-    height: 100vh;
-    background-color: #343a40;
-    color: white;
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .sidebar nav ul {
-    list-style: none;
-    padding: 0;
-  }
-  
-  .sidebar nav ul li {
-    margin: 10px 0;
-  }
-  
-  .sidebar nav ul li a {
-    color: white;
-    text-decoration: none;
-    padding: 10px;
-    display: block;
-  }
-  
-  .sidebar nav ul li a:hover {
-    background-color:azure;
+  width: 200px;
+  background-color: #1e1e2d;
+  color: #fff;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 0;
+}
+
+.sidebar h2 {
+  margin-bottom: 30px;
+}
+
+.sidebar ul {
+  list-style-type: none;
+  padding: 0;
+  width: 100%;
+}
+
+.sidebar ul li {
+  margin: 20px 0;
+}
+
+.sidebar ul li a {
+  color: #fff;
+  text-decoration: none;
+  display: block;
+  padding: 10px;
+  width: 100%;
+  text-align: center;
+  border-radius: 4px;
+}
+
+.sidebar ul li a:hover {
+  background-color: #575768;
+}
+
+.sidebar-bottom {
+  margin-top: auto;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.sidebar-bottom button {
+  background-color: #ff9f43;
+  border: none;
+  padding: 10px 20px;
+  margin: 10px 0;
+  color: #fff;
+  cursor: pointer;
+  border-radius: 4px;
+  width: 80%;
+}
+
+.sidebar-bottom button:hover {
+  background-color: #ffa733;
 }
